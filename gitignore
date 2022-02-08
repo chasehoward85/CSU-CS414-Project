@@ -1,0 +1,7 @@
+**/node_modules
+**/package-lock.json
+server/.m2
+server/.project
+server/.settings
+**/target
+.vscode
