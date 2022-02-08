@@ -1,0 +1,18 @@
+{
+    "$id": "https://example.com/address.schema.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "newUser",
+    "description": "newUser response response",
+    "type": "object",
+    "properties": {
+        "requestType": {
+          "description": "the TIP object type should be newUser",
+          "type":"string",
+          "pattern":"^newUser$"
+        },
+        "userName": {
+          "description": "the userName should be returned on success",
+          "type": "string"
+        }
+    }
+}

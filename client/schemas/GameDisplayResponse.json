@@ -1,0 +1,23 @@
+{
+    "$id": "https://example.com/address.schema.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "gameDisplay",
+    "description": "gameDisplay response response",
+    "type": "object",
+    "properties": {
+        "requestType": {
+          "description": "the TIP object type should be newUser",
+          "type":"string",
+          "pattern":"^gameDisplay$"
+        },
+        "setDisplay": {
+          "description": "invite should be sent back",
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+    },
+    "required":["requestType", "setDisplay"],
+	"additionalProperties": true
+}

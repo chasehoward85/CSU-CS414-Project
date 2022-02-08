@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { sendAPIRequest } from '../utils/restfulAPI';
+import { sendAPIRequest } from '../utils/API/restfulAPI';
 
 export function useServerInputValidation(serverUrl, close) {
     const [serverInput, setServerInput] = useState(serverUrl);

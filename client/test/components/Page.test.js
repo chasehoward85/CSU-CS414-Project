@@ -1,38 +1,78 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent, act } from '@testing-library/react';
 import user from '@testing-library/user-event';
-import { beforeEach, describe, expect, it } from '@jest/globals';
-import { CLIENT_TEAM_NAME } from '../../src/utils/constants';
+import * as mockGameApi from '../../src/utils/API/gameAPI';
+import { beforeEach, describe, expect, it, jest } from '@jest/globals';
 import { VALID_CONFIG_RESPONSE } from '../sharedMocks';
+import { SnackbarProvider} from 'notistack';
+
 import Page from '../../src/components/Page';
+import { gameDisplayContext } from '../../src/utils/contexts/gameDisplay';
 
 describe('Page', () => {
-    beforeEach(() => {
+    let renderedComponent;
+
+    // async calls in useServerSettings do not resolve without awaiting
+    async function renderPage() {
+        return new Promise((resolve) => {
+            renderedComponent = render(<gameDisplayContext.Provider value={{games: "", setGame: jest.fn()}}><SnackbarProvider maxSnack={3} preventDuplicate><Page /></SnackbarProvider ></gameDisplayContext.Provider>);
+            resolve();
+        });
+    }
+
+    beforeEach(async () => {
+        jest.spyOn(mockGameApi, 'getInitialState').mockResolvedValue({ features: [], type: '', board: { a1: 'wQ' }});
+        jest.spyOn(mockGameApi, 'getGame').mockResolvedValue({ features: [], setDisplay:[]});
         fetch.resetMocks();
         fetch.mockResponse(VALID_CONFIG_RESPONSE);
 
-        render(<Page />);
+        await act(renderPage);
     });
 
-    it('renders the team name in header', async () => {
-        await waitFor(() => {
-            const headings = screen.getAllByRole('heading', { name: /T[0-9][0-9]/i });
-            expect(headings[0].textContent).toEqual(CLIENT_TEAM_NAME);
-        })
+    it('should render', () => {
+        expect(renderedComponent).toBeTruthy();
     });
 
-    it('closes map and opens about when header is clicked', async () => {
-        const collapse = screen.getByTestId('planner-collapse');
-        expect(collapse.classList.contains('show')).toBe(true);
+    it('should navigate to the correct tab', () => {
+        const tab1 = screen.getByText('Sign In');
+        // const tab2 = screen.getByText('My Profile');
+        // const tab3 = screen.getByText("Invitations");
 
-        const toggleButton = screen.getByRole('button', { name: /T[0-9][0-9]/i })
-        user.click(toggleButton);
+        expect(tab1.classList.values()).toContain('active');
+        // expect(tab2.classList.values()).not.toContain('active');
+        // expect(tab3.classList.values()).not.toContain("active");
 
-        await waitFor(() => {
-            expect(collapse.classList.contains('show')).toBe(false);
 
-            const aboutCloseButton = screen.getByRole('button', { name: /close/i });
-            expect(aboutCloseButton.textContent).toEqual('Close');
-        });
+        // act(() => {
+        //     fireEvent.click(tab2);
+        // });
+
+        // expect(tab1.classList.values()).not.toContain('active');
+        // expect(tab2.classList.values()).toContain('active');
+        // expect(tab3.classList.values()).not.toContain("active");
+
+        // act(() => {
+        //     fireEvent.click(tab3);
+        // });
+
+        // expect(tab1.classList.values()).not.toContain('active');
+        // expect(tab2.classList.values()).not.toContain('active');
+        // expect(tab3.classList.values()).toContain("active");
+
+        // act(() => {
+        //     fireEvent.click(tab1);
+        // });
+
+        // expect(tab1.classList.values()).toContain('active');
+        // expect(tab2.classList.values()).not.toContain('active');
+        // expect(tab3.classList.values()).not.toContain("active");
+        
+        // act(() => {
+        //     fireEvent.click(tab1);
+        // });
+
+        // expect(tab1.classList.values()).toContain('active');
+        // expect(tab2.classList.values()).not.toContain('active');
+        // expect(tab3.classList.values()).not.toContain("active");
     });
 });

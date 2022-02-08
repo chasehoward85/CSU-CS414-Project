@@ -1,7 +1,8 @@
-import React from 'react';
-import { Container } from 'reactstrap';
+import React, { useContext } from 'react';
+import { Container, Button } from 'reactstrap';
 import { useToggle } from '../../hooks/useToggle';
 import ServerSettings from './ServerSettings';
+import { usernameContext } from '../../utils/contexts/username';
 
 const UNICODE_LINK_SYMBOL = "\uD83D\uDD17";
 const UNICODE_WARNING_SIGN = "\u26A0";
@@ -25,6 +26,7 @@ function ServerInformation(props) {
     const serverName = connectedToValidServer() ? props.serverSettings.serverConfig.serverName : UNKNOWN_SERVER_NAME;
     const linkStatusSymbol = connectedToValidServer() ? UNICODE_LINK_SYMBOL : UNICODE_WARNING_SIGN;
 
+    const {username} = useContext(usernameContext);
     return (
         <div className="vertical-center tco-text">
             <Container>
@@ -39,6 +41,8 @@ function ServerInformation(props) {
                         serverSettings={props.serverSettings}
                         processServerConfigSuccess={props.processServerConfigSuccess}
                     />
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    {username ? <Button size="sm" color="outline-light" onClick={() => props.setUnregister(true)}>Unregister</Button> : ""}
                 </div>
             </Container>
         </div>

@@ -1,0 +1,21 @@
+{
+	"$id": "https://example.com/address.schema.json",
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"title": "sendInvitation",
+	"description": "invite response",
+	"type": "object",
+	"properties": {
+		"requestType": {
+			"description": "the TIP object type should be invite",
+			"type": "string",
+			"pattern": "^sendInvite$"
+		},
+		"sent": {
+			"description": "there should be a sent",
+			"type": "boolean"
+		}
+	},
+	"required":["requestType", "sent"],
+	"additionalProperties": true
+  }
+  

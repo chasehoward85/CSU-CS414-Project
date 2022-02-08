@@ -1,0 +1,36 @@
+{
+    "$id": "https://example.com/address.schema.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "userStats",
+    "description": "userStats object for response",
+    "type": "object",
+    "properties": {
+      "requestType": {
+        "description": "the object type should have user statistics",
+        "type": "string",
+        "pattern": "^getStats$"
+      },
+      "wins": {
+          "description": "the object should have player wins",
+          "type": "integer",
+          "minimum": 0
+      },
+      "losses": {
+        "description": "the object should have an player losses",
+        "type": "integer",
+        "minimum": 0
+      },
+      "played": {
+        "description": "the object should have a total number of games played",
+        "type": "integer",
+        "minimum": 0
+      },
+      "userName": {
+        "description": "the object should have the player user name",
+        "type": "string",
+        "pattern": "^[A-Za-z0-9]{1,64}$"
+      }
+    },
+    "required":["requestType", "wins", "losses", "played", "userName"],
+    "additionalProperties": true
+  }

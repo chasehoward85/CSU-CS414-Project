@@ -1,0 +1,24 @@
+{
+    "$id": "https://example.com/address.schema.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "currentUser",
+    "description": "currentUser response response",
+    "type": "object",
+    "properties": {
+        "requestType": {
+          "description": "the TIP object type should be newUser",
+          "type":"string",
+          "pattern":"^currentUser$"
+        },
+        "userName": {
+          "description": "the userName should be returned on success",
+          "type": "string"
+        },
+        "unregister": {
+          "description": "should return true when unregistered",
+          "type": "boolean"
+        }
+    },
+    "required":["userName"],
+    "additionalProperties": true
+}

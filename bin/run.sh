@@ -29,6 +29,7 @@ function usage {
   echo "Options:"
   echo "    -h, --help     :  Display this menu";
   echo "    -e, --env      :  Specify environment, possible choices: [dev,prod], (default, dev)";
+  echo "    -t, --test     :  Run tests independantly, possible choices: [client,server], (default, both)";
   echo ""
 }
 
@@ -132,6 +133,10 @@ function run_client_tests {
   check_error $?
 }
 
+function run_server_tests {
+  mvn -f ${REPO_ROOT}/server --global-settings ${REPO_ROOT}/server/.m2/settings.xml -Drevision=${REVISION} -Dbuild.directory.prefix=${BUILD_DIRECTORY_PREFIX} test $@
+}
+
 function run_server_and_hotloader {
   npm run dev --prefix ${REPO_ROOT}/client
   check_error $?
@@ -165,6 +170,17 @@ while (( "$#" )); do
         exit 1
       fi
       ;;
+    # START custom flags
+    -t|--test)
+      if [[ !(-e "$2") || "$2" == "client" ]]; then
+        run_client_tests
+      fi
+      if [[ !(-e "$2") || "$2" == "server" ]]; then
+        run_server_tests
+      fi
+      exit 0
+      ;;
+    # END custom flags
     -*|--*=) # unsupported flags
       echo "unrecognized option -- $(echo $1 | sed 's~^-*~~')" >&2
       usage;
