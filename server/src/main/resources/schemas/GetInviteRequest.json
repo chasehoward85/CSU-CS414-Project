@@ -1,0 +1,21 @@
+{
+	"$id": "https://example.com/address.schema.json",
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"title": "sendInvitation",
+	"description": "invite object for POST request",
+	"type": "object",
+	"properties": {
+		"requestType": {
+			"description": "the object type should be invite",
+			"type": "string",
+			"pattern": "^getInvite$"
+		},
+		"userName": {
+			"description": "there should be a sender",
+			"type": "string"
+		}
+    },
+    "required":["requestType", "userName"],
+	"additionalProperties": true
+}
+    

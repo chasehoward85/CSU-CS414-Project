@@ -11,5 +11,5 @@ public abstract class Request {
     }
 
     // Overrideable Methods
-    public abstract void buildResponse() throws BadRequestException;
+    public abstract void prepareResponse() throws BadRequestException;
 }

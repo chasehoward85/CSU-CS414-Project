@@ -1,0 +1,25 @@
+{
+    "$id": "https://example.com/address.schema.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "config",
+    "description": "config object for POST request",
+    "type": "object",
+    "properties": {
+      "requestType": {
+        "description": "the object type should be board request",
+        "type": "string",
+        "pattern": "^boardRequest$"
+      },
+      "game": {
+        "type": "object",
+        "patternProperties": {
+         "^[a-h]{1}[1-8]{1}$": {
+          "type": "string",
+          "pattern": "^[wb]{1}[PRNBQK]{1}$"
+         }
+        }
+      }
+    },
+    "required":["game"],
+    "additionalProperties": true
+  }

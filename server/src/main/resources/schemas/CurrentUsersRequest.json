@@ -1,0 +1,29 @@
+{
+    "$id": "https://example.com/address.schema.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "currentUser",
+    "description": "currentUser object for POST request",
+    "type": "object",
+    "properties": {
+      "requestType": {
+        "description": "the object type should be newUser",
+        "type": "string",
+        "pattern": "^currentUser$"
+      },
+      "email": {
+          "description": "the object should have an email",
+          "type": "string",
+          "pattern": "^(.)*@(.*).(.)*$"
+      },
+      "password": {
+        "description": "the object should have a password",
+        "type": "string"
+      },
+      "unregister": {
+        "description": "the object may be an unregister request",
+        "type": "boolean"
+      }
+    },
+    "required":["requestType", "email", "password"],
+    "additionalProperties": true
+  }

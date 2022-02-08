@@ -1,0 +1,32 @@
+{
+  "$id": "https://example.com/address.schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "config",
+  "description": "config object for POST request",
+  "type": "object",
+  "properties": {
+    "requestType": {
+      "description": "the object type should be getInitialState",
+      "type": "string",
+      "pattern": "^getInitialState$"
+    },
+		"id": {
+			"description": "there should be an id",
+			"type": "integer"
+		},
+    "p1": {
+      "description": "there should be a p1",
+      "type": "string"
+    },
+    "p2": {
+      "description": "there should be a p2",
+      "type":"string"
+    },
+    "accepted": {
+      "description": "there should be an accepted value",
+      "type": "boolean"
+    }
+  },
+  "required":["requestType", "id", "p1", "p2", "accepted"],
+  "additionalProperties": true
+}

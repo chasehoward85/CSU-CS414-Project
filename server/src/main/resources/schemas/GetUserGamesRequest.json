@@ -1,0 +1,21 @@
+{
+  "$id": "https://example.com/address.schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "getUserGameRequest",
+  "description": "Object to handle requests for the games a user is involved with",
+  "type": "object",
+  "properties": {
+    "requestType": {
+      "description": "the object type should be getUserGames",
+      "type": "string",
+      "pattern": "^getUserGames$"
+    },
+    "userName": {
+      "description": "the name of the user requesting games",
+      "type": "string",
+      "pattern": "^[A-Za-z0-9]{1,64}$"
+    }
+  },
+  "required":["requestType", "userName"],
+  "additionalProperties": true
+}

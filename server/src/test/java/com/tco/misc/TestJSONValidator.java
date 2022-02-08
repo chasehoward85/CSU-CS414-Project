@@ -1,6 +1,6 @@
 package com.tco.misc;
 
-import com.tco.requests.ConfigRequest;
+import com.tco.requests.config.ConfigRequest;
 
 import java.lang.reflect.Type;
 

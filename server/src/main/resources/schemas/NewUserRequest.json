@@ -1,0 +1,30 @@
+{
+    "$id": "https://example.com/address.schema.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "config",
+    "description": "config object for POST request",
+    "type": "object",
+    "properties": {
+      "requestType": {
+        "description": "the object type should be newUser",
+        "type": "string",
+        "pattern": "^newUser$"
+      },
+      "email": {
+          "description": "the object should have an email",
+          "type": "string",
+          "pattern": "^(.)*@(.*).(.)*$"
+      },
+      "password": {
+        "description": "the object should have an email",
+        "type": "string"
+      },
+      "userName": {
+        "description": "the object should have an email",
+        "type": "string",
+        "pattern": "^[A-Za-z0-9]{1,64}$"
+      }
+    },
+    "required":["requestType", "email", "password", "userName"],
+    "additionalProperties": true
+  }
